@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  Url: "http://127.0.0.1:7000/api/",
+  Urlimage: "http://127.0.0.1/images/",
+  UrlGET: "http://127.0.0.1:7000/",
 };
 
 /*

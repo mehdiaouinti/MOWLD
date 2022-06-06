@@ -1,0 +1,91 @@
+<div class="movie-card">
+  <div class="container">
+    <a><img src="{{ image }}" width="180px" alt="cover" class="cover" /></a>
+
+    <div class="hero">
+      <div class="details">
+        <div class="title1">
+          {{ titre }} <span>{{ pays }}</span>
+        </div>
+
+        <div class="title2" style="padding-top: 1%">{{ episode }}</div>
+
+        <fieldset class="rating">
+          <ngx-star-rating
+            [(ngModel)]="rating2"
+            [style]="ratingStyle"
+            [id]="'rating2'"
+            [disabled]="true"
+            style="padding-left: 2%"
+          ></ngx-star-rating>
+        </fieldset>
+        <div style="display: flex; padding-top: 1%">
+          <mat-icon
+            mat-list-icon
+            style="color: rgb(255, 255, 255); font-size: 22px"
+            >visibility</mat-icon
+          >
+          <p style="color: rgb(255, 255, 255); font-size: 18px">{{ nbr_vu }}</p>
+        </div>
+      </div>
+      <!-- end details -->
+    </div>
+    <!-- end hero -->
+
+    <div class="description">
+      <div class="column1">
+        <span class="tag" style="color: rgb(0, 0, 0); font-size: 18px">{{
+          genre
+        }}</span>
+        <span class="tag" style="color: rgb(0, 0, 0); font-size: 18px">{{
+          type
+        }}</span>
+      </div>
+      <!-- end column1 -->
+
+      <div class="column2">
+        <p style="color: rgb(0, 0, 0); font-size: 18px">{{ description }}</p>
+      </div>
+      <!-- end column2 -->
+    </div>
+    <!-- end description -->
+    <div style="padding-top: 3%">
+      <video style="width: 1000px" src="{{ video }}" controls></video>
+    </div>
+
+    <div style="padding-top: 2%">
+      <h2 style="color: black">Tous les episodes</h2>
+
+      <div style="padding-top: 2%">
+        <div class="card-view" *ngFor="let p of list_products">
+          <div
+            class="card-header"
+            [style.background-image]="'url(' + image + ')'"
+            style="background-size: cover"
+          >
+            <div class="card-header-icon">
+              <a href="/episode/{{ id_saison }}/{{ p.fields.num }}">
+                <i class="material-icons header-icon">play_arrow</i>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="card-movie-content"
+            style="background-color: rgb(13, 0, 27)"
+          >
+            <div class="card-movie-content-head">
+              <a>
+                <h3 class="card-movie-title" style="color: aliceblue">
+                  {{ p.fields.nom }}
+                </h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end container -->
+</div>
+<!-- end movie-card -->

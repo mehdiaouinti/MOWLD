@@ -1,0 +1,107 @@
+
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  </head>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+    <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+  </svg>
+ <mat-toolbar style="background-color: #F7F7F7;"class="example-toolbar">
+
+
+   <div class="container1">
+    <button type="button" class="btn btn-" disabled="true">  
+    <mat-icon class="v-align-middle">bar_chart</mat-icon>
+    <span class="v-align-middle" style="padding-left: 3%;">Derniérs ajoutés</span> 
+    </button>
+</div>
+<div class="container1">
+ 
+    <button type="button" class="btn btn-" (click)="Get_plus_aime()">  
+    <mat-icon class="v-align-middle">favorite</mat-icon>
+    <span class="v-align-middle" style="padding-left: 3%;">Plus aimés</span> 
+    </button>
+</div>
+<div class="container1">
+    <button type="button" class="btn btn-"  (click)="Get_plus_vue()">  
+    <mat-icon class="v-align-middle">person</mat-icon>
+    <span class="v-align-middle" style="padding-left: 3%;">plus regardés</span> 
+    </button>
+  </div>
+
+  
+ 
+
+<ng-select
+  [searchable]="false"
+  (change)="onChangetype($event)"
+  [items]="types"
+  bindLabel="name"
+  placeholder="Type"
+  [(ngModel)]="selectedtype"
+>
+ 
+</ng-select>
+<ng-select
+  [searchable]="false"
+  (change)="onChangepays($event)"
+  [items]="pays"
+  bindLabel="name"
+  placeholder="Pays"
+  [(ngModel)]="selectedpays"
+>
+ 
+</ng-select>
+
+<div class="searchbar" >
+    <input class="search_input" type="text"  placeholder="Rechercher" [(ngModel)]="term" >
+    <a  class="search_icon"><i class="fas fa-search"></i></a>
+  </div>
+
+
+</mat-toolbar>
+
+
+
+    
+    <div class="card-view"  style=" padding-bottom: 2%;"  *ngFor="let p of list_produits | filter:term  | paginate: { itemsPerPage: 12, currentPage: p }">
+        <div class="card-header" routerLink="/detailproduit/{{p.pk}}"  [style.background-image]="'url('+urlimage+p.fields.image+')'" 
+        style="background-size: cover;cursor: pointer;">
+            <div class="card-header-icon">
+                <a>
+                    
+                    <i class="material-icons header-icon">play_arrow</i>
+                </a>
+            </div>
+        </div>
+    
+        <div  class="card-movie-content" >
+            <div class="card-movie-content-head" >
+                <a href="#" >
+                    <h3 class="card-movie-title">{{p.fields.nom}}  </h3> 
+                </a>
+                <div class="ratings"><span *ngIf="p.fields.note_final == 0">-- </span><span *ngIf="p.fields.note_final > 0">{{p.fields.note_final*2}} </span>/10</div>
+            </div>
+            <div class="card-movie-info">
+                <div class="movie-running-time">
+                    <label style="color: rgb(13, 0, 27);font-size: 13px;">Nombre Des Saisons</label>
+                    <span style="font-size: 13px;">{{p.fields.nbr_saison}} Saison</span>
+                </div>
+                <div class="movie-running-time">
+                    <label style="color: rgb(13, 0, 27);font-size: 13px;">Pays</label>
+                    <span style="font-size: 13px;">{{p.fields.pays}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class="center-div"  *ngIf="length_produit > 0" >
+    <pagination-controls class="my-pagination" style="padding-top: 1px;" (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+
+  
+
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" 
+    type = "ball-clip-rotate" [fullScreen] = "true">
+    <p style="font-size: 20px; color: white">veuillez patienter</p>
+    </ngx-spinner>

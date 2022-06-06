@@ -1,0 +1,236 @@
+<div
+  class="header-area header-area--absolute"
+  style="background-color: rgba(0, 12, 46, 1)"
+>
+  <div class="preview-header-inner header-sticky">
+    <div class="container-fluid container-fluid--cp-150">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="header position-relative">
+            <!-- brand logo -->
+            <div class="header__logo" style="padding-left: 3%">
+              <a>
+                <img
+                  style="height: 40px; width: 40px"
+                  src="../assets/cima.jpg"
+                  class="img-fluid light-logo"
+                  alt="4in data"
+                />
+                <img
+                  src="../assets/cima.jpg"
+                  class="img-fluid dark-logo"
+                  alt=""
+                />
+              </a>
+              <h5 style="padding-left: 2%; font-size: 26px">OWLD</h5>
+            </div>
+
+            <div></div>
+            <!-- navigation menu -->
+            <div
+              class="header__navigation menu-style-four preview-menu d-none d-xl-block"
+            >
+              <nav
+                class="navigation-menu navigation-menu--onepage navigation-menu-right"
+              >
+                <ul>
+                  <li>
+                    <a
+                      routerLink="/accueil"
+                      style="font-family: 'Open Sans', sans-serif"
+                      ><span>Accueil</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="/produits/film"><span>Films</span></a>
+                  </li>
+                  <li>
+                    <a href="/produits/serie"><span>Séries</span></a>
+                  </li>
+                  <li>
+                    <a href="#section-blogs"><span>Documentaires</span></a>
+                  </li>
+                  <li>
+                    <a href="#section-events"><span>Sports</span></a>
+                  </li>
+                  <li>
+                    <a href="#section-contact"><span>Live</span></a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <!-- header actions -->
+            <div
+              *ngIf="getAuthService().isAuthenticated() == false"
+              class="header__actions--preview"
+              style="padding-left: 10%"
+            >
+              <div class="header__actions">
+                <div class="header__icons-wrapper header-right-inner">
+                  <div class="header-button downlode-btn ml-4">
+                    <button
+                      (click)="show_modal(content6)"
+                      type="button"
+                      class="btn btn-"
+                    >
+                      <mat-icon class="v-align-middle" style="color: #ffffff"
+                        >subdirectory_arrow_right</mat-icon
+                      >
+                      <span class="v-align-middle" style="color: aliceblue"
+                        >Se connecter</span
+                      >
+                    </button>
+                  </div>
+                </div>
+                <div></div>
+                <!-- mobile menu -->
+                <div
+                  class="mobile-navigation-icon d-block d-xl-none"
+                  id="mobile-menu-trigger"
+                >
+                  <i></i>
+                </div>
+              </div>
+            </div>
+            <div class="header__icons-wrapper header-right-inner">
+              <div
+                *ngIf="getAuthService().isAuthenticated()"
+                class="header-button downlode-btn ml-4"
+              >
+                <button type="button" class="btn btn-">
+                  <mat-icon class="v-align-middle" style="color: #ffffff"
+                    >person</mat-icon
+                  >
+                  <span class="v-align-middle" style="color: aliceblue">{{
+                    getUsername()
+                  }}</span>
+                </button>
+              </div>
+            </div>
+
+            <div
+              *ngIf="getAuthService().isAuthenticated()"
+              class="header__icons-wrapper header-right-inner"
+            >
+              <div class="header-button downlode-btn ml-4">
+                <button (click)="logout()" type="button" class="btn btn-">
+                  <mat-icon class="v-align-middle" style="color: #ffffff"
+                    >subdirectory_arrow_left</mat-icon
+                  >
+                  <span class="v-align-middle" style="color: aliceblue"
+                    >Se deconnecter</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content6 let-c="close" let-d="dismiss">
+  <div class="login-form">
+    <div *ngIf="login_bool">
+      <form [formGroup]="loginForm">
+        <h1>Login</h1>
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="username"
+            style="color: rgb(13, 0, 27)"
+            placeholder="Username"
+          />
+          <span class="input-icon"><i class="fa fa-envelope"></i></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="password"
+            style="color: rgb(13, 0, 27)"
+            placeholder="Password"
+          />
+          <span class="input-icon"><i class="fa fa-lock"></i></span>
+        </div>
+        <button class="login-btn" (click)="connect()">Login</button>
+        <a class="reset-psw" (click)="login_b()">Sign up</a>
+      </form>
+    </div>
+    <div *ngIf="login_bool == false">
+      <form [formGroup]="RegisterForm">
+        <h1>Inscription</h1>
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="username_r"
+            style="color: rgb(13, 0, 27)"
+            placeholder="Username"
+          />
+          <span class="input-icon"><i class="fa fa-envelope"></i></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            formControlName="email_r"
+            style="color: rgb(13, 0, 27)"
+            placeholder="Email"
+          />
+          <span class="input-icon"><i class="fa fa-envelope"></i></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="password_r"
+            style="color: rgb(13, 0, 27)"
+            placeholder="Password"
+          />
+          <span class="input-icon"><i class="fa fa-lock"></i></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="password_r1"
+            style="color: rgb(13, 0, 27)"
+            placeholder="Repeat password"
+          />
+          <span class="input-icon"><i class="fa fa-lock"></i></span>
+        </div>
+        <button class="login-btn" (click)="inscri()">Register</button>
+        <a class="reset-psw" (click)="login_b()">Sign in</a>
+      </form>
+    </div>
+    <div class="seperator"><b>or</b></div>
+    <p>Sign in with your social media account</p>
+    <!-- Social login buttons -->
+    <div class="social-icon">
+      <button type="button" style="background-color: #1da1f2">
+        <i class="fa fa-twitter"></i>
+      </button>
+      <button
+        type="button"
+        style="background-color: #3b5998"
+        (click)="socialSignIn('facebook')"
+      >
+        <i class="fa fa-facebook"></i>
+      </button>
+      <button
+        type="button"
+        style="background-color: rgb(13, 0, 27)"
+        (click)="socialSignIn('google')"
+      >
+        <i class="fa fa-google"></i>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate"
+  [fullScreen]="true"
+>
+  <p style="font-size: 20px; color: white">veuillez patienter</p>
+</ngx-spinner>

@@ -1,0 +1,40 @@
+  <div class="card-view"  *ngFor="let p of list_fav">
+    <div class="card-header" routerLink="/detailproduit/{{p.pk}}"  [style.background-image]="'url('+urlimage+p.fields.image+')'" 
+    style="background-size: cover;">
+        <div class="card-header-icon">
+            <a>
+                
+                <i class="material-icons header-icon">play_arrow</i>
+            </a>
+        </div>
+    </div>
+
+    <div  class="card-movie-content" >
+        <div class="card-movie-content-head" >
+            <a href="#" >
+                <h3 class="card-movie-title">{{p.fields.nom}}  </h3> 
+            </a>
+            <div class="ratings"><span>-- </span>/10</div>
+        </div>
+        <div class="card-movie-info">
+            <div class="movie-running-time">
+                <label style="color: rgb(13, 0, 27);font-size: 13px;">Nombre Des Saisons</label>
+                <span style="font-size: 13px;">{{p.fields.nbr_saison}} Saison</span>
+            </div>
+            <div class="movie-running-time">
+                <label style="color: rgb(13, 0, 27);font-size: 13px;">Pays</label>
+                <span style="font-size: 13px;">{{p.fields.pays}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

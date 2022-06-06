@@ -1,0 +1,59 @@
+<div class="row" style="padding: 7%">
+  <div class="col-lg-12">
+    <app-affichescroller></app-affichescroller>
+  </div>
+
+  <div class="col-lg-12" style="padding-top: 2%">
+    <h3 style="text-align: center; color: rgb(255, 255, 255)">
+      Nouveautés Films
+    </h3>
+    <app-cardscroller [type_recherche]="new" [type]="typet"></app-cardscroller>
+  </div>
+
+  <div class="col-lg-12" style="padding-top: 2%">
+    <h3 style="text-align: center; color: rgb(255, 255, 255)">
+      Nouveautés Series
+    </h3>
+    <app-cardscroller [type_recherche]="new" [type]="types"></app-cardscroller>
+  </div>
+
+  <div class="col-lg-12" style="padding-top: 2%">
+    <h3 style="text-align: center; color: rgb(255, 255, 255)">
+      Films-Les plus regardés
+    </h3>
+    <app-cardscroller
+      [type_recherche]="plus_vu"
+      [type]="typet"
+    ></app-cardscroller>
+  </div>
+
+  <div class="col-lg-12" style="padding-top: 2%">
+    <h3 style="text-align: center; color: rgb(255, 255, 255)">
+      Series-Les plus regardés
+    </h3>
+    <app-cardscroller
+      [type_recherche]="plus_vu"
+      [type]="types"
+    ></app-cardscroller>
+  </div>
+
+  <div class="col-lg-12" style="padding-top: 2%">
+    <h3 style="text-align: center; color: rgb(255, 255, 255)">Films-Comédie</h3>
+    <app-cardscroller
+      [type_recherche]="genre"
+      [type]="typet"
+      [nom]="comedie"
+    ></app-cardscroller>
+  </div>
+
+  <div class="col-lg-12" style="padding-top: 2%">
+    <h3 style="text-align: center; color: rgb(255, 255, 255)">
+      Films-Amarique
+    </h3>
+    <app-cardscroller
+      [type_recherche]="pays"
+      [type]="typet"
+      [nom]="amarique"
+    ></app-cardscroller>
+  </div>
+</div>

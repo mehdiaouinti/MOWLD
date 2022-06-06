@@ -1,0 +1,19 @@
+video::-webkit-media-controls { 
+    display:none !important; 
+  }
+  
+  .video-container {
+      padding-top: 4%;
+      width: 1500px;
+      
+ 
+  
+  }
+  
+  .controls { 
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    width: 100%;
+    z-index:2147483647; 
+  }

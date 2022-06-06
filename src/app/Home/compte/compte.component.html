@@ -1,0 +1,539 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous"
+  />
+</head>
+<div class="rows" style="padding: 2%">
+  <div class="col-lg-12" style="display: flex">
+    <div class="col-lg-4" style="display: flex">
+      <p style="color: rgb(255, 255, 255); font-size: 20px">Username :</p>
+      <span
+        style="color: rgb(255, 255, 255); font-size: 18px; padding-left: 2%"
+      >
+        {{ nom }}</span
+      >
+    </div>
+
+    <div class="col-lg-4" style="display: flex">
+      <p style="color: rgb(255, 255, 255); font-size: 20px">Email :</p>
+      <span
+        style="color: rgb(255, 255, 255); font-size: 18px; padding-left: 2%"
+      >
+        {{ email }}</span
+      >
+    </div>
+  </div>
+  <div class="col-lg-12" style="display: flex">
+    <div class="col-lg-4" style="display: flex">
+      <p style="color: rgb(255, 255, 255); font-size: 20px">Nom :</p>
+      <span
+        style="color: rgb(255, 255, 255); font-size: 18px; padding-left: 2%"
+      >
+        __</span
+      >
+    </div>
+
+    <div class="col-lg-4" style="display: flex">
+      <p style="color: rgb(255, 255, 255); font-size: 20px">Prenom :</p>
+      <span
+        style="color: rgb(255, 255, 255); font-size: 18px; padding-left: 2%"
+      >
+        __</span
+      >
+    </div>
+  </div>
+  <div class="col-lg-12" style="display: flex">
+    <div class="col-lg-4" style="display: flex">
+      <p style="color: rgb(255, 255, 255); font-size: 20px">
+        Date de création :
+      </p>
+      <span
+        style="color: rgb(255, 255, 255); font-size: 18px; padding-left: 2%"
+      >
+        {{ date_rejoind }}</span
+      >
+    </div>
+
+    <div *ngIf="etat_b" class="col-lg-4" style="display: flex">
+      <p style="color: rgb(255, 255, 255); font-size: 20px">Role :</p>
+      <span
+        style="color: rgb(255, 255, 255); font-size: 18px; padding-left: 2%"
+      >
+        {{ statut }}
+      </span>
+    </div>
+  </div>
+  <div *ngIf="etat_b" class="col-lg-12">
+    <mat-toolbar style="background-color: #f7f7f7" class="example-toolbar">
+      <div class="container1">
+        <button
+          type="button"
+          class="btn btn-"
+          (click)="openmodal_produit(content2)"
+        >
+          <mat-icon class="v-align-middle">add</mat-icon>
+          <span class="v-align-middle" style="padding-left: 3%"
+            >Ajoutez Produit</span
+          >
+        </button>
+      </div>
+      <div class="container1">
+        <button
+          type="button"
+          class="btn btn-"
+          (click)="openmodal_saison(content3)"
+        >
+          <mat-icon class="v-align-middle">add</mat-icon>
+          <span class="v-align-middle" style="padding-left: 3%"
+            >Ajouter Saison</span
+          >
+        </button>
+      </div>
+      <div class="container1">
+        <button
+          type="button"
+          class="btn btn-"
+          (click)="openmodal_episode(content4)"
+        >
+          <mat-icon class="v-align-middle">add</mat-icon>
+          <span class="v-align-middle" style="padding-left: 3%"
+            >Ajouter Episode</span
+          >
+        </button>
+      </div>
+      <div class="container1">
+        <ng-select
+          [searchable]="false"
+          (change)="onChangetype($event)"
+          [items]="types"
+          bindLabel="name"
+          placeholder="Type"
+          [(ngModel)]="selectedtype"
+        >
+        </ng-select>
+      </div>
+      <div class="container1">
+        <div class="searchbar">
+          <input
+            class="search_input"
+            type="text"
+            placeholder="Rechercher"
+            [(ngModel)]="term"
+          />
+          <a class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+      </div>
+    </mat-toolbar>
+    <notifier-container></notifier-container>
+  </div>
+
+  <div
+    class="card-view"
+    style="padding-bottom: 2%"
+    *ngFor="
+      let p of list_produits
+        | filter: term
+        | paginate: { itemsPerPage: 12, currentPage: p }
+    "
+  >
+    <div
+      class="card-header"
+      [style.background-image]="'url(' + urlimage + p.fields.image + ')'"
+      style="background-size: cover; cursor: pointer"
+    >
+      <div class="card-header-icon">
+        <a>
+          <i class="material-icons header-icon">play_arrow</i>
+        </a>
+      </div>
+    </div>
+
+    <div class="card-movie-content">
+      <div class="card-movie-content-head">
+        <a>
+          <h3 class="card-movie-title">{{ p.fields.nom }}</h3>
+        </a>
+        <div class="ratings">
+          <span *ngIf="p.fields.note_final == 0">-- </span
+          ><span *ngIf="p.fields.note_final > 0"
+            >{{ p.fields.note_final * 2 }} </span
+          >/10
+        </div>
+      </div>
+      <div class="card-movie-info" style="display: flex">
+        <div style="padding-right: 2px">
+          <input
+            type="button"
+            (click)="openmodal_update(p.pk, content2)"
+            class="btn btn-info"
+            value="Modifier"
+          />
+        </div>
+
+        <div style="padding-left: 5px">
+          <input type="button" class="btn btn-danger" value="Supprimer" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="center-div" *ngIf="length_produit > 0">
+    <pagination-controls
+      class="my-pagination"
+      style="padding-top: 1px"
+      (pageChange)="p = $event"
+    ></pagination-controls>
+  </div>
+
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-clip-rotate"
+    [fullScreen]="true"
+  >
+    <p style="font-size: 20px; color: white">veuillez patienter</p>
+  </ngx-spinner>
+</div>
+
+<ng-template #content2 let-c="close" let-d="dismiss">
+  <div style="padding: 3%">
+    <form [formGroup]="ProduitForm" autocomplete="off" form #values1="ngForm">
+      <div class="row">
+        <div class="col-lg-5" style="padding: 2%">
+          <input
+            formControlName="titre"
+            style="padding-left: 5%"
+            type="text"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && fval.titre.errors }"
+            placeholder="Titre"
+          />
+        </div>
+        <div class="col-lg-4" style="padding: 2%">
+          <input
+            formControlName="pays"
+            style="padding-left: 5%"
+            type="text"
+            class="form-control"
+            id="pays"
+            placeholder="Pays"
+          />
+        </div>
+        <div class="col-lg-3" style="padding: 2%">
+          <mat-checkbox
+            formControlName="new"
+            (change)="checkCheckBoxvalue($event)"
+            [(ngModel)]="checked"
+            >Nouveau!</mat-checkbox
+          >
+        </div>
+        <div class="col-lg-12" style="padding: 2%">
+          <textarea
+            formControlName="description"
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="Description"
+          ></textarea>
+        </div>
+        <div class="col-lg-5" style="display: flex; padding: 2%">
+          <label style="font-size: 15px">Image</label>
+          <input
+            name="image"
+            (change)="onChange($event)"
+            type="file"
+            class="form-control-file"
+            id="exampleFormControlFile1"
+            style="font-size: 15px; padding-left: 2%"
+          />
+        </div>
+        <div class="col-lg-4" style="padding: 2%">
+          <input
+            formControlName="nbr"
+            style="padding-left: 5%"
+            type="text"
+            class="form-control"
+            id="inputEmail"
+            placeholder="Nombres des saisons"
+          />
+        </div>
+        <div class="col-lg-5" style="display: flex; padding: 2%">
+          <label style="font-size: 15px">Video </label>
+          <input
+            name="video"
+            (change)="onChange1($event)"
+            type="file"
+            class="form-control-file"
+            id="exampleFormControlFile1"
+            style="font-size: 15px; padding-left: 2%"
+          />
+        </div>
+        <div class="col-lg-5" style="display: flex; padding: 2%">
+          <mat-radio-group
+            aria-label="choisir :"
+            [formControl]="choix1"
+            [(ngModel)]="choix"
+          >
+            <mat-radio-button value="serie" checked="checked"
+              >Serie
+            </mat-radio-button>
+            <mat-radio-button value="film" style="padding-left: 2%"
+              >Film
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-lg-5">
+          <ng-select
+            formControlName="acteurs"
+            [items]="acteurslist"
+            (change)="changeacteur($event)"
+            bindLabel="name"
+            placeholder="Choisir acteur"
+            [(ngModel)]="selectedproduit"
+          >
+          </ng-select>
+        </div>
+
+        <div class="col-lg-7" style="display: flex; padding: 2%">
+          <mat-form-field class="demo-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip
+                *ngFor="let mot of mots"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove2(mot)"
+              >
+                {{ mot.name }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+        <div
+          class="col-lg-12"
+          style="
+            display: flex;
+            padding: 2%;
+            border: 1px solid black;
+            border-color: black;
+          "
+        >
+          <form [formGroup]="ActeurForm" autocomplete="off" form></form>
+          <div class="col-lg-4" style="display: flex; padding: 2%">
+            <input
+              formControlName="nv"
+              style="padding-left: 5%"
+              type="text"
+              class="form-control"
+              id="inputEmail"
+              placeholder="Nouveau acteur"
+            />
+          </div>
+          <div class="col-lg-5" style="display: flex; padding: 2%">
+            <label style="font-size: 15px">Image</label>
+            <input
+              name="image2"
+              (change)="onChangeacteur($event)"
+              type="file"
+              class="form-control-file"
+              id="exampleFormControlFile1"
+              style="font-size: 15px; padding-left: 2%"
+            />
+          </div>
+
+          <div class="col-lg-2" style="display: flex; padding: 2%">
+            <button class="myBtn2" (click)="add_acteur()">
+              <mat-icon class="v-align-middle" style="color: rgb(0, 156, 247)"
+                >person</mat-icon
+              ><span style="padding-left: 3%">Ajoutez</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-5" style="padding: 2%">
+          <input
+            formControlName="genre"
+            style="padding-left: 5%"
+            type="text"
+            class="form-control"
+            id="inputEmail"
+            placeholder="Genre"
+          />
+        </div>
+        <button
+          type="submit"
+          (click)="gestion_produit()"
+          [disabled]="ProduitForm.invalid"
+          class="btn btn-primary"
+        >
+          Ajouter
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #content3 let-c="close" let-d="dismiss">
+  <div style="padding: 3%">
+    <form
+      [formGroup]="SaisonForm"
+      autocomplete="off"
+      form
+      #values2="ngForm"
+      (ngSubmit)="onSubmit1(values2)"
+    >
+      <div class="row">
+        <div class="col-lg-4" style="padding: 2%">
+          <input
+            formControlName="titre"
+            style="padding-left: 5%"
+            type="number"
+            class="form-control"
+            placeholder="Num Saison"
+          />
+        </div>
+        <div class="col-lg-5">
+          <ng-select
+            formControlName="produit"
+            [items]="produits"
+            (change)="changeLeagueOwner($event)"
+            bindLabel="name"
+            placeholder="Choisir Produit"
+            [(ngModel)]="selectedproduit"
+          >
+          </ng-select>
+        </div>
+
+        <div class="col-lg-5" style="display: flex; padding: 2%">
+          <mat-radio-group
+            style="display: flex; padding-top: 2%"
+            (change)="radioChange($event)"
+            aria-label="choisir :"
+            [formControl]="choix2"
+            [(ngModel)]="choiximage"
+          >
+            <mat-radio-button value="imagep" [checked]="false" [disabled]="true"
+              >Image produit
+            </mat-radio-button>
+            <mat-radio-button
+              value="imagen"
+              [checked]="true"
+              style="padding-left: 2%"
+              >Nouveau Image
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div
+          *ngIf="image_bool"
+          class="col-lg-8"
+          style="display: flex; padding: 2%"
+        >
+          <label style="font-size: 15px">Image</label>
+          <input
+            name="image"
+            (change)="onChange2($event)"
+            type="file"
+            class="form-control-file"
+            id="exampleFormControlFile1"
+            style="font-size: 15px; padding-left: 2%"
+          />
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="SaisonForm.invalid"
+          class="btn btn-primary"
+        >
+          Ajouter
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #content4 let-c="close" let-d="dismiss">
+  <div style="padding: 3%">
+    <form
+      [formGroup]="EpisodeForm"
+      autocomplete="off"
+      form
+      #values3="ngForm"
+      (ngSubmit)="onSubmit2(values3)"
+    >
+      <div class="row">
+        <div class="col-lg-5">
+          <ng-select
+            formControlName="produit"
+            [items]="produits"
+            (change)="changeproduit($event)"
+            bindLabel="name"
+            placeholder="Choisir Produit"
+            [(ngModel)]="selectedproduit1"
+          >
+          </ng-select>
+        </div>
+
+        <div class="col-lg-5">
+          <ng-select
+            formControlName="saison"
+            [items]="saisons"
+            (change)="changesaison($event)"
+            bindLabel="name"
+            placeholder="Choisir saison"
+            [(ngModel)]="selectedsaison"
+          >
+          </ng-select>
+        </div>
+        <div class="col-lg-4" style="padding: 2%">
+          <input
+            formControlName="titre"
+            style="padding-left: 5%"
+            type="number"
+            class="form-control"
+            placeholder="Num Saison"
+          />
+        </div>
+        <div class="col-lg-5" style="display: flex; padding: 2%">
+          <label style="font-size: 15px">Video </label>
+          <input
+            name="video"
+            (change)="onChange3($event)"
+            type="file"
+            class="form-control-file"
+            id="exampleFormControlFile1"
+            style="font-size: 15px; padding-left: 2%"
+          />
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="EpisodeForm.invalid"
+          class="btn btn-primary"
+        >
+          Ajouter
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate"
+  [fullScreen]="true"
+>
+  <p style="font-size: 20px; color: white">veuillez patienter</p>
+</ngx-spinner>
+<notifier-container style="padding-left: 20%"></notifier-container>

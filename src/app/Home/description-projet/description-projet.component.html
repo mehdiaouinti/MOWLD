@@ -1,0 +1,193 @@
+<header [style.background-image]="'url(' + image + ')'">
+  <!-- This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS -->
+  <div class="overlay"></div>
+
+  <!-- The HTML5 video element that will create the background video on the header -->
+  <video
+    *ngIf="video_b"
+    playsinline="playsinline"
+    [src]="video"
+    autoplay="autoplay"
+    [muted]="true"
+    loop="loop"
+    #vid
+  ></video>
+
+  <!-- The header content -->
+
+  <div class="container">
+    <div class="content">
+      <div style="display: flex">
+        <h1 style="padding-top: 1%">{{ titre }}</h1>
+        <ngx-star-rating
+          [(ngModel)]="rating2"
+          [id]="'rating2'"
+          [disabled]="true"
+          style="padding-left: 2%"
+        ></ngx-star-rating>
+      </div>
+
+      <p>{{ description }}.</p>
+
+      <div class="buttons_bar">
+        <div class="serieb">
+          <button class="myBtn" (click)="add_favorite()">
+            <mat-icon class="v-align-middle" style="color: red"
+              >favorite</mat-icon
+            ><span style="padding-left: 3%">{{ nom_favorite }}</span>
+          </button>
+        </div>
+        <div class="serieb">
+          <button class="myBtn1" (click)="open_modal_note(content1)">
+            <mat-icon class="v-align-middle" style="color: rgb(243, 239, 12)"
+              >star</mat-icon
+            ><span style="padding-left: 3%">Noter</span>
+          </button>
+        </div>
+        <div class="serieb">
+          <button class="myBtn2" (click)="open_modal_login(content4)">
+            <mat-icon class="v-align-middle" style="color: rgb(9, 255, 0)"
+              >edit</mat-icon
+            ><span style="padding-left: 3%">Partager</span>
+          </button>
+        </div>
+        <div class="serieb">
+          <button class="myBtn4" (click)="son()">
+            <mat-icon
+              class="v-align-middle"
+              *ngIf="son_b"
+              style="color: rgb(156, 156, 156)"
+              >volume_up</mat-icon
+            >
+            <mat-icon
+              class="v-align-middle"
+              *ngIf="son_b == false"
+              style="color: rgb(255, 0, 0)"
+              >volume_off</mat-icon
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div
+  class="container"
+  *ngIf="casting_b"
+  style="padding-top: 2%; padding-right: 2%"
+>
+  <div class="content">
+    <h2 style="color: rgb(255, 255, 255)">Casting</h2>
+    <div class="row" style="padding-top: 2%">
+      <div
+        class="col-lg-2"
+        *ngFor="let p of listacteurs"
+        style="cursor: pointer; padding: 2px"
+      >
+        <a>
+          <img
+            *ngIf="p.fields.image.length > 0"
+            src="{{ urlimage }}{{ p.fields.image }}"
+            alt="Avatar"
+            class="avatar"
+          />
+          <img
+            *ngIf="p.fields.image.length == 0"
+            src="{{ urlimage }}avatar.jpg"
+            alt="Avatar"
+            class="avatar"
+          />
+          <span> {{ p.fields.nom }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="container"
+  style="padding-top: 2%; padding-right: 2%"
+  *ngIf="boolfiche"
+>
+  <div class="content">
+    <h3 style="color: rgb(255, 255, 255); padding-top: 2%">Production</h3>
+
+    <a>
+      <span style="font-size: 20px"> {{ production }}</span>
+    </a>
+    <h3 style="color: rgb(255, 255, 255); padding-top: 2%">Scénario</h3>
+
+    <a>
+      <img src="{{ urlimage }}avatar.jpg" alt="Avatar" class="avatar" />
+      <span> {{ scenario }}</span>
+    </a>
+    <h3 style="color: rgb(255, 255, 255); padding-top: 2%">Réalisation</h3>
+
+    <a>
+      <img src="{{ urlimage }}avatar.jpg" alt="Avatar" class="avatar" />
+      <span> {{ realisateur }}</span>
+    </a>
+  </div>
+</div>
+
+<div class="card-view" style="cursor: pointer" *ngFor="let p of list_products">
+  <div
+    class="card-header"
+    [style.background-image]="'url(' + urlimage + p.fields.image + ')'"
+    style="background-size: cover"
+  >
+    <div class="card-header-icon">
+      <a (click)="login_check(p.pk, content4)">
+        <i class="material-icons header-icon">play_arrow</i>
+      </a>
+    </div>
+  </div>
+
+  <div class="card-movie-content">
+    <div class="card-movie-content-head">
+      <a (click)="login_check(p.pk, content4)">
+        <h3 class="card-movie-title">{{ titre }}-{{ p.fields.nom }}</h3>
+      </a>
+      <div class="ratings"><span>-- </span>/10</div>
+    </div>
+    <div class="card-movie-info">
+      <div class="movie-running-time">
+        <label style="color: rgb(13, 0, 27); font-size: 13px"
+          >Nombre Des Saisons</label
+        >
+        <span style="font-size: 13px">{{ nbr_saison }} Saison</span>
+      </div>
+      <div class="movie-running-time">
+        <label style="color: rgb(13, 0, 27); font-size: 13px">Pays</label>
+        <span style="font-size: 13px">{{ pays }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="cont">
+    <div class="stars">
+      <ngx-star-rating [(ngModel)]="rating3" [id]="'rating3'"></ngx-star-rating>
+    </div>
+    <button class="myBtn3" (click)="save_note()">Ajouter</button>
+  </div>
+</ng-template>
+
+<ng-template #content4 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Opps !</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Veuillez vous connecter !</p>
+  </div>
+  <!--  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="login()">Se Connecter</button>
+  </div> -->
+</ng-template>

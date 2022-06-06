@@ -1,0 +1,318 @@
+* {
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+.intro {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #6abcea;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.navbar-dark {
+  padding: 15px !important;
+  background: #13191d !important;
+}
+
+.sidebar {
+  line-height: 26px;
+  padding-top: 50px;
+}
+
+.sidebar ul {
+  margin: 30px 0px;
+}
+
+.sidebar .nav-link {
+  display: block;
+  text-align: center;
+}
+
+.sidebar .nav-link i {
+  display: block;
+  text-align: center;
+}
+
+.sidebar .nav-link.active {
+  color: #03a9f4;
+}
+
+.movie_list {
+  margin-top: 5rem;
+  padding-left: 4rem !important;
+}
+
+.card-view {
+  background: #ffffff;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 540px;
+  max-width: 315px;
+  margin: 2em;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.card-header {
+  padding: 0;
+  margin: 0;
+  height: 367px;
+  width: 100%;
+  display: block;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-header-icon {
+  position: relative;
+}
+
+.header-icon {
+  width: 100%;
+  height: 367px;
+  line-height: 367px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 auto;
+  color: #ffffff;
+  font-size: 54px;
+  text-shadow: 0px 0px 20px #6abcea, 0px 5px 20px #6abcea;
+  opacity: 0.85;
+}
+
+.header-icon:hover {
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 74px;
+  text-shadow: 0px 0px 20px #6abcea, 0px 5px 30px #6abcea;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  opacity: 1;
+}
+
+.card-view:hover {
+  -webkit-transform: scale(1.03);
+  transform: scale(1.03);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-movie-content {
+  padding: 18px 18px 24px 18px;
+  margin: 0;
+}
+
+.card-movie-content-head,
+.card-movie-info {
+  display: table;
+  width: 100%;
+}
+
+.card-movie-title {
+  font-size: 22px;
+  margin: 0;
+  display: table-cell;
+}
+
+.ratings {
+  width: 50px;
+  height: 15px;
+  background-size: contain;
+  display: table-cell;
+  text-align: right;
+  position: relative;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.ratings span {
+  color: #2196f3;
+}
+
+.card-movie-info {
+  margin-top: 1em;
+}
+
+.movie-running-time {
+  display: table-cell;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.movie-running-time:first-of-type {
+  text-align: left;
+}
+
+.movie-running-time:last-of-type {
+  text-align: right;
+}
+
+.movie-running-time label {
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5em;
+  font-size: 9px;
+}
+
+.movie-running-time span {
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.vertical-center {
+  padding: 1%;
+  padding-top: 14%;
+}
+
+button {
+  background: rgb(13, 0, 27) !important;
+  color: #fff !important;
+  font-size: 18px;
+  padding: 0.5rem 3rem;
+  outline: none;
+  border: 0 !important;
+}
+
+.container1 {
+  padding: 5px;
+}
+
+.v-align-middle {
+  vertical-align: middle;
+}
+
+.search_input > input[type="text"] {
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+.search_input > input[type="text"]:focus {
+  width: 100%;
+}
+
+::placeholder {
+  color: rgb(255, 255, 255);
+}
+
+.searchbar {
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 45px;
+  background-color: rgb(13, 0, 27);
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.search_input {
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  font-size: 18px;
+  caret-color: transparent;
+  line-height: 25px;
+  transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_input {
+  padding: 0 10px;
+  width: 250px;
+  caret-color: rgb(13, 0, 27);
+  transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_icon {
+  background: white;
+  color: rgb(13, 0, 27);
+}
+
+.search_icon {
+  height: 25px;
+  width: 25px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: white;
+  color: rgb(13, 0, 27);
+  text-decoration: none;
+}
+
+.ng-select.custom {
+  border: 0px;
+  min-height: 0px;
+  height: 30px;
+  border-radius: 0;
+}
+.ng-select.custom .ng-select-container {
+  min-height: 0px;
+  border-radius: 0;
+}
+.ng-select.custom ::ng-deep .ng-select-container {
+  min-height: 0px;
+  border-radius: 0;
+}
+ng-select {
+  width: 200px;
+  height: 70px;
+  padding-left: 1%;
+  padding-right: 2%;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: rgb(13, 0, 27);
+}
+
+.center-div {
+  padding-left: 5%;
+  margin: 0 auto;
+  width: 30%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
+}
+.myBtn2 {
+  width: 160px;
+  font-size: 14px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}

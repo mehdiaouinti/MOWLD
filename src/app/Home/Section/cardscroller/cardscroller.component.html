@@ -1,0 +1,64 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</head>
+
+<div style="display: flex">
+  <div class="vertical-center">
+    <i
+      class="fa fa-angle-left"
+      style="font-size: 68px; color: rgb(255, 255, 255)"
+      (click)="left()"
+    ></i>
+  </div>
+
+  <drag-scroll #nav [scroll-x-wheel-enabled]="true" style="width: 100%">
+    <div
+      class="card"
+      *ngFor="let p of productList; let i = index"
+      style="padding-left: 2%"
+      drag-scroll-item
+    >
+      <a href="/detailproduit/{{ p.id }}">
+        <div
+          class="img1"
+          [style.background-image]="'url(' + urlimage + p.filename + ')'"
+        ></div>
+        <div
+          class="img2"
+          [style.background-image]="'url(' + urlimage + p.filename + ')'"
+        ></div>
+        <div class="title">{{ p.title }}</div>
+        <div class="text">{{ p.genre }}</div>
+        <a
+          ><div class="catagory">{{ p.type }} <i class="fas fa-film"></i></div
+        ></a>
+        <a
+          ><div class="views">{{ p.nbr_vu }} <i class="far fa-eye"></i></div
+        ></a>
+      </a>
+    </div>
+    <h4 style="color: aliceblue"></h4>
+  </drag-scroll>
+  <div class="vertical-center">
+    <i
+      class="fa fa-angle-right"
+      style="font-size: 68px; color: rgb(255, 255, 255)"
+      (click)="right()"
+    ></i>
+  </div>
+</div>
+
+<div class="bottom-placeholder"></div>
+<div class="bottom-placeholder"></div>
+<div class="bottom-placeholder"></div>
+<div class="bottom-placeholder"></div>

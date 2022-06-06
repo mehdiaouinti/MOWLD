@@ -1,0 +1,72 @@
+<div class="example-container">
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    autosize
+    style="background-color: rgb(13, 0, 27) ;"
+  >
+    <mat-sidenav
+      *ngIf="getAuthService().isAuthenticated()"
+      #sidenav
+      class="example-sidenav"
+      mode="side"
+      opened="true"
+    >
+      <mat-nav-list class="dashboard">
+        <a mat-list-item (click)="isExpanded = !isExpanded">
+          <mat-icon mat-list-icon>menu</mat-icon>
+        </a>
+        <a
+          mat-list-item
+          routerLink="/accueil"
+          routerLinkActive="active-list-item"
+        >
+          <mat-icon mat-list-icon>home</mat-icon>
+          <p matLine *ngIf="isExpanded">Home</p>
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <a
+          mat-list-item
+          routerLink="/compte"
+          routerLinkActive="active-list-item"
+        >
+          <mat-icon mat-list-icon style="color: green">person</mat-icon>
+          <p matLine *ngIf="isExpanded">Mon compte</p>
+        </a>
+        <a
+          mat-list-item
+          routerLink="/favorite"
+          routerLinkActive="active-list-item"
+        >
+          <mat-icon mat-list-icon style="color: red">favorite</mat-icon>
+          <p matLine *ngIf="isExpanded">Mes préférées</p>
+        </a>
+        <a
+          mat-list-item
+          (click)="toggleActive($event)"
+          routerLinkActive="active-list-item"
+        >
+          <mat-icon mat-list-icon style="color: orange">video_label</mat-icon>
+          <p matLine *ngIf="isExpanded">Mes enregistres</p>
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <a
+          mat-list-item
+          (click)="toggleActive($event)"
+          routerLinkActive="active-list-item"
+        >
+          <mat-icon mat-list-icon style="color: blue">visibility</mat-icon>
+          <p matLine *ngIf="isExpanded">Mes Regardes</p>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <app-header></app-header>
+
+    <div style="padding-top: 4%; background-color: rgb(13, 0, 27) ;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>
+</div>
